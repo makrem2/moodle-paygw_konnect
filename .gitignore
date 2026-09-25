@@ -1,0 +1,12 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# Node (only if you later add a build toolchain; amd/build/*.min.js is committed)
+node_modules/
+npm-debug.log*

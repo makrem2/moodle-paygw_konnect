@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="payment/gateway/konnect/db" VERSION="20260925" COMMENT="XMLDB file for the Konnect payment gateway plugin."
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="paygw_konnect" COMMENT="Stores Konnect payment transactions and maps a Konnect payment reference to a Moodle payable item.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="paymentid" TYPE="int" LENGTH="18" NOTNULL="false" SEQUENCE="false" COMMENT="The id in the core payments table, set once the payment is completed."/>
+        <FIELD NAME="paymentref" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The Konnect paymentRef returned by init-payment."/>
+        <FIELD NAME="component" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="paymentarea" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="itemid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="accountid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="amount" TYPE="number" LENGTH="12" DECIMALS="3" NOTNULL="true" SEQUENCE="false" COMMENT="The amount in the payment currency (not in millimes)."/>
+        <FIELD NAME="currency" TYPE="char" LENGTH="3" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="50" NOTNULL="true" DEFAULT="pending" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="paymentref" UNIQUE="true" FIELDS="paymentref"/>
+        <INDEX NAME="comp-area-item" UNIQUE="false" FIELDS="component, paymentarea, itemid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
